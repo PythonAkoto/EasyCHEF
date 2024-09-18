@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+<h1>Home Page</h1>
+<p>
+    Welcome to the EasyCHEF flask app! <br><br>
+    Please enter your ingredients to find a meal <br>
+    or select the random recipe option.
+</p>
+<br>
+<br>
+<div class="container">
+    <form action="{{ url_for('home.homepage') }}" method="post">
+        <h3>Search Recipe</h3><br>
+        <p>
+            Find me a meal with...
+            <input type="text" name="ingredients">
+        </p><br>
+        <button type="submit">Find Meal</button><br>
+        {% if recipe1 %}
+
+        <br><b>{{ recipe1_title }}</b><br><br>
+
+        <img src="{{ recipe1_img }}" alt="{{ recipe1_title }}"> <br>
+
+        {% if recipe1["usedIngredients"] %}
+        {% for ingredient in recipe1["usedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% if recipe1["missedIngredients"] %}
+        {% for ingredient in recipe1["missedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% endif %}
+
+        {% if recipe2 %}
+
+        <br><b>{{ recipe2_title }}</b><br><br>
+
+        <img src="{{ recipe2_img }}" alt="{{ recipe2_title }}"> <br>
+
+        {% if recipe2["usedIngredients"] %}
+        {% for ingredient in recipe2["usedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% if recipe2["missedIngredients"] %}
+        {% for ingredient in recipe2["missedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% endif %}
+
+        {% if recipe3 %}
+
+        <br><b>{{ recipe3_title }}</b><br><br>
+
+        <img src="{{ recipe3_img }}" alt="{{ recipe3_title }}"> <br>
+
+        {% if recipe3["usedIngredients"] %}
+        {% for ingredient in recipe3["usedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% if recipe3["missedIngredients"] %}
+        {% for ingredient in recipe3["missedIngredients"] %}
+        {{ ingredient["original"] }} <br>
+        {% endfor %}
+        {% endif %}
+
+        {% endif %}
+
+        {% if void %}
+        {{ void }}
+        {% endif %}
+    </form>
+</div>
+<br><br>
+<div class="container">
+    <form action="{{ url_for('home.random_recipe') }}" method="post">
+        <h3>Get Random Recipe!</h3><br>
+        <p>
+            Click the button below to get your random recipe!
+        </p><br>
+        <!-- <select name="meal_options" id="mealOptions">
+            <option value=""></option>
+            <option value="breakfast">Breakfast</option>
+            <option value="brunch">Brunch</option>
+            <option value="starter">Starter</option>
+            <option value="main_course">Main Course</option>
+            <option value="dessert">Dessert</option>
+            <option value="vege">Vegeterian</option>
+            <option value="vegan">Vegan</option>
+        </select> <br> -->
+        <button type="submit">Get Random Meal</button> <br><br>
+        {% if data %}
+
+        <br><b>{{ title }} </b><br><br>
+
+        <img src="{{ img }}" alt="{{ title }}"> <br>
+
+        <p>
+            <b>servings:</b> {{ servings }} people <br>
+            <b>how to make:</b><br>
+            {{ instructions }}
+        </p>
+
+        {% endif %}
+
+        {% if void %}
+        {{ void }}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock content %}
